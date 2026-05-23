@@ -4,8 +4,8 @@
     {
       "name": "portfolio-preview",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "preview", "--", "--port", "4173"],
-      "port": 4173
+      "runtimeArgs": ["run", "dev"],
+      "port": 5173
     }
   ]
 }
