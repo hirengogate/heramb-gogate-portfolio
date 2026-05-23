@@ -152,7 +152,7 @@ const portfolioData = {
       company: 'Abhitech Energycon Ltd',
       role: 'Digital Marketing Specialist',
       location: 'Mumbai, India',
-      period: 'Nov 2024 - Apr 2025',
+      period: 'Apr 2024 - Nov 2024',
       points: [
         'Grew LinkedIn company followers by 600+ through niche group engagement, discussion prompts, and consistent posting.',
         'Achieved a 28% open rate for a C-suite email campaign promoting an international B2B exhibition in Jakarta.',

@@ -1,4 +1,4 @@
-import { ArrowUpRight, Gauge, MousePointerClick, Orbit } from 'lucide-react';
+import { ArrowUpRight, Gauge, Orbit } from 'lucide-react';
 
 const bars = [46, 68, 54, 82, 63, 92, 76];
 
@@ -7,7 +7,6 @@ export function CampaignVisual() {
     <div className="campaign-visual" aria-label="Abstract campaign performance visual">
       <div className="visual-header">
         <span>Growth command view</span>
-        <span className="status-dot">Live</span>
       </div>
 
       <div className="visual-main">
@@ -40,10 +39,6 @@ export function CampaignVisual() {
         <span>
           <Gauge size={16} />
           Attribution aligned
-        </span>
-        <span>
-          <MousePointerClick size={16} />
-          Creative loop active
         </span>
       </div>
     </div>

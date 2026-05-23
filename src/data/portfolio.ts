@@ -68,6 +68,37 @@ export type SkillGroup = {
   items: string[];
 };
 
+// Work is segmented by discipline/service. Each Discipline is its own routed
+// page (#/work/:slug). A Discipline holds Projects (the actual case studies);
+// these arrays start empty and get populated as case-study content is added.
+export type Project = {
+  title: string;
+  brand: string;
+  period: string;
+  summary: string;
+  highlights: string[];
+  metrics?: { value: string; label: string }[];
+  images?: { src: string; caption?: string; half?: boolean }[];
+};
+
+export type Discipline = {
+  slug: string;
+  title: string;
+  eyebrow: string;
+  summary: string;
+  icon: IconName;
+  accent: 'teal' | 'wine' | 'gold' | 'ink';
+  projects: Project[];
+};
+
+export type Testimonial = {
+  name: string;
+  title: string;
+  company: string;
+  quote: string;
+  avatar: string;
+};
+
 export type Certification = {
   title: string;
   detail: string;
