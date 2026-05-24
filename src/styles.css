@@ -1324,6 +1324,7 @@ ul {
   }
 
   nav a {
+    padding-block: 12px;
     white-space: nowrap;
   }
 
