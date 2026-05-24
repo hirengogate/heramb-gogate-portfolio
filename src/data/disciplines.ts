@@ -127,6 +127,47 @@ const eDrishyam: Project = {
   ],
 };
 
+const pokarnaSocial: Project = {
+  title: 'Cold-Start Brand Launch & Editorial Growth for a Premium Menswear Label',
+  brand: 'House of Pokarna',
+  period: 'Sep 2025 – May 2026',
+  summary:
+    'Took House of Pokarna — a new artisan fashion house — from an almost-empty Instagram presence to an established, Meta-verified brand page, building the editorial content engine and luxury visual identity that grew it from 12 followers to 4,093 in roughly eight months.',
+  metrics: [
+    { value: '12 → 4,093', label: 'Followers (Sep ’25 → May ’26)' },
+    { value: '341x', label: 'Follower growth from cold start' },
+    { value: '97', label: 'Posts shipped (2 → 99)' },
+    { value: 'Verified', label: 'Meta-verified brand page' },
+  ],
+  highlights: [
+    'Launched the page from a cold start — 2 posts and 12 followers in September 2025 — and scaled it to 99 posts and 4,093 followers by May 2026, a 341x follower increase in roughly eight months.',
+    'Built a premium editorial content engine with bold, provocative campaign taglines — “luxury after dark”, “rewrite the crown”, “power isn’t spoken”, and “every stitch, a rebellion” — to position the label as aspirational, high-end menswear.',
+    'Directed a cohesive luxury aesthetic across formats: branded editorial photoshoots, ethnic-fusion looks (bandhgalas, safas, paisley and brocade), tailored suiting, and fabric and texture detail shots that held a consistent grid identity.',
+    'Established the brand as a Meta-verified page early, lending instant credibility and discoverability to a brand-new label with no prior audience.',
+    'Drove growth through a disciplined content calendar and a recognizable visual signature rather than generic product posts — every piece reinforced the “art of fashion heritage” positioning.',
+  ],
+  images: [
+    {
+      src: '/social/pokarna-ig-sep2025.jpg',
+      caption: 'House of Pokarna Instagram — September 2025: 2 posts, 12 followers.',
+      half: true,
+    },
+    {
+      src: '/social/pokarna-ig-may2026.jpeg',
+      caption: 'House of Pokarna Instagram — May 2026: 99 posts, 4,093 followers, Meta-verified.',
+      half: true,
+    },
+    {
+      src: '/social/pokarna-grid-campaign.jpeg',
+      caption: 'Editorial campaign grid — bold taglines and premium menswear creatives in a consistent luxury aesthetic.',
+    },
+    {
+      src: '/social/pokarna-grid-feed.jpeg',
+      caption: 'Feed — branded editorial photoshoots spanning ethnic-fusion, tailored, and statement looks.',
+    },
+  ],
+};
+
 export const disciplines: Discipline[] = [
   {
     slug: 'performance-marketing',
@@ -213,7 +254,7 @@ export const disciplines: Discipline[] = [
       'Growing engaged, on-brand audiences across Instagram, Facebook, and LinkedIn with content systems, calendars, and low-budget boosting.',
     icon: 'Share2',
     accent: 'wine',
-    projects: [kraasaSocial, amuktiSocial, eDrishyam],
+    projects: [kraasaSocial, pokarnaSocial, amuktiSocial, eDrishyam],
   },
   {
     slug: 'seo',
