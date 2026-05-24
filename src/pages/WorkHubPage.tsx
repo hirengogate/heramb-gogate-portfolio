@@ -9,8 +9,8 @@ export function WorkHubPage() {
     <section className="section page">
       <SectionHeading
         eyebrow="Selected work"
-        title="Pick the area you're looking for."
-        copy="The work is grouped by discipline so clients and recruiters can jump straight to what's relevant. Each card opens a dedicated page with the case studies behind it."
+        title="Work organized by what you're looking for."
+        copy="Each area below is its own page. Open one to see the case studies, campaigns, and results behind it."
       />
 
       <div className="case-grid">

@@ -206,6 +206,16 @@ export const disciplines: Discipline[] = [
     ],
   },
   {
+    slug: 'social-media-marketing',
+    title: 'Social Media Marketing',
+    eyebrow: 'Organic growth · Boosted content',
+    summary:
+      'Growing engaged, on-brand audiences across Instagram, Facebook, and LinkedIn with content systems, calendars, and low-budget boosting.',
+    icon: 'Share2',
+    accent: 'wine',
+    projects: [kraasaSocial, amuktiSocial, eDrishyam],
+  },
+  {
     slug: 'seo',
     title: 'SEO',
     eyebrow: 'Technical · On-page · Off-page',
@@ -258,16 +268,6 @@ export const disciplines: Discipline[] = [
         ],
       },
     ],
-  },
-  {
-    slug: 'social-media-marketing',
-    title: 'Social Media Marketing',
-    eyebrow: 'Organic growth · Boosted content',
-    summary:
-      'Growing engaged, on-brand audiences across Instagram, Facebook, and LinkedIn with content systems, calendars, and low-budget boosting.',
-    icon: 'Share2',
-    accent: 'wine',
-    projects: [kraasaSocial, amuktiSocial, eDrishyam],
   },
   {
     slug: 'outbound-lead-generation',

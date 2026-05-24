@@ -12,7 +12,7 @@ export function ContactPage({ data, gmailComposeUrl }: ContactPageProps) {
   return (
     <section className="contact-section page" id="contact">
       <p className="eyebrow">Contact</p>
-      <h2>Need someone who can connect creative output to commercial results?</h2>
+      <h2>Need someone who can make your marketing efforts actually convert?</h2>
       <p>
         Reach out for growth marketing roles, D2C or Lead Generation performance projects, SEO/content systems, or Social Media Marketing
       </p>
