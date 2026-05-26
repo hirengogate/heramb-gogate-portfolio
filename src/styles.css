@@ -1211,6 +1211,8 @@ ul {
 }
 
 .testimonial-card {
+  display: flex;
+  flex-direction: column;
   padding: clamp(24px, 3vw, 34px);
   border: 1px solid rgba(23, 23, 20, 0.1);
   border-radius: 18px;
@@ -1219,6 +1221,7 @@ ul {
 }
 
 .testimonial-card svg {
+  flex: 0 0 auto;
   margin-bottom: 16px;
   color: var(--teal);
 }
@@ -1234,6 +1237,7 @@ ul {
   display: flex;
   align-items: center;
   gap: 14px;
+  margin-top: auto;
 }
 
 .testimonial-card__avatar {
