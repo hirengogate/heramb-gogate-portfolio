@@ -260,6 +260,20 @@ export const disciplines: Discipline[] = [
             caption: 'Meta Ads Manager — Kraasa cost per purchase, purchase ROAS, and amount spent.',
           },
         ],
+        videos: [
+          {
+            src: '/performance/kraasa-ugc-deepak.mp4',
+            caption: 'UGC ad creative — creator-led product piece run on Meta.',
+          },
+          {
+            src: '/performance/kraasa-ugc-1.mp4',
+            caption: 'UGC ad creative — creator-led product piece run on Meta.',
+          },
+          {
+            src: '/performance/kraasa-ugc-2.mp4',
+            caption: 'UGC ad creative — creator-led product piece run on Meta.',
+          },
+        ],
       },
       {
         title: 'Full-Funnel Meta & Google Performance for a Premium D2C Brand',
