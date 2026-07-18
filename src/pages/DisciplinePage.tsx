@@ -1,4 +1,5 @@
-import { ArrowLeft, FolderPlus } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { ArrowLeft, FolderPlus, Play } from 'lucide-react';
 import { Link } from '../lib/router';
 import { getDiscipline } from '../data/disciplines';
 import { iconMap, type Project } from '../data/portfolio';
@@ -8,6 +9,119 @@ import { iconMap, type Project } from '../data/portfolio';
 function posterFor(src: string): string {
   const file = src.split('/').pop()?.replace(/\.mp4$/, '.webp') ?? '';
   return `/posters/${file}`;
+}
+
+// A clip is paused once it is mostly scrolled off screen. Deliberately low so
+// that reading the caption under a playing clip doesn't stop it.
+const VISIBLE_ENOUGH = 0.25;
+
+/**
+ * Keeps the clips on a discipline page well behaved: only one plays at a time,
+ * and scrolling a playing clip out of view pauses it.
+ *
+ * Runs off the DOM rather than per-video React state because the videos are
+ * spread across sibling ProjectCards and never need to re-render for this —
+ * pausing is a direct imperative call on the element.
+ */
+function useTidyVideoPlayback(root: React.RefObject<HTMLElement | null>, key: string) {
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+
+    const videos = Array.from(el.querySelectorAll('video'));
+    if (videos.length === 0) return;
+
+    // Leave a clip alone while it owns the screen — pausing a fullscreen or
+    // picture-in-picture video because the page scrolled behind it is wrong.
+    const isDetached = (v: HTMLVideoElement) =>
+      document.fullscreenElement === v || document.pictureInPictureElement === v;
+
+    const onPlay = (event: Event) => {
+      for (const other of videos) {
+        if (other !== event.target && !other.paused) other.pause();
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.intersectionRatio < VISIBLE_ENOUGH && !video.paused && !isDetached(video)) {
+            video.pause();
+          }
+        }
+      },
+      { threshold: [0, VISIBLE_ENOUGH] },
+    );
+
+    for (const video of videos) {
+      video.addEventListener('play', onPlay);
+      observer.observe(video);
+    }
+
+    return () => {
+      for (const video of videos) video.removeEventListener('play', onPlay);
+      observer.disconnect();
+    };
+    // `key` re-binds when the route swaps in a different set of clips.
+  }, [root, key]);
+}
+
+/**
+ * A single UGC clip: poster plus an explicit play button. Nothing is fetched
+ * until the visitor presses play, and the button comes back whenever the clip
+ * pauses — including when the exclusive-playback and scroll rules pause it —
+ * so there is always an obvious way to start it again.
+ */
+function ReelVideo({ src, poster, label }: { src: string; poster: string; label: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [started, setStarted] = useState(false);
+
+  const start = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    setStarted(true);
+    void video.play().catch(() => {
+      // Autoplay policy or a decode failure — leave the button up so the
+      // visitor can try again rather than staring at a dead frame.
+      setPlaying(false);
+    });
+  };
+
+  return (
+    <div className="reel">
+      <video
+        ref={videoRef}
+        src={src}
+        poster={poster}
+        // Native controls only once it is running; before that the poster and
+        // the play button are the whole interface.
+        controls={started}
+        playsInline
+        preload="none"
+        aria-label={label}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onEnded={() => setPlaying(false)}
+      />
+      {!playing ? (
+        <button
+          type="button"
+          // Before first play the whole poster is the target. Once the native
+          // controls are showing, shrink the hit area to the disc so a paused
+          // clip's scrubber stays reachable.
+          className={started ? 'reel__play is-compact' : 'reel__play'}
+          onClick={start}
+          aria-label={`Play: ${label}`}
+        >
+          <span className="reel__play-disc">
+            <Play size={26} fill="currentColor" strokeWidth={0} />
+          </span>
+        </button>
+      ) : null}
+    </div>
+  );
 }
 
 function ProjectCard({ project }: { project: Project }) {
@@ -66,15 +180,10 @@ function ProjectCard({ project }: { project: Project }) {
         <div className="project-card__reels">
           {project.videos.map((video) => (
             <figure key={video.src}>
-              {/* preload="none" keeps page load free of video bytes; the poster
-                  supplies the still frame until the visitor hits play. */}
-              <video
+              <ReelVideo
                 src={video.src}
                 poster={video.poster ?? posterFor(video.src)}
-                controls
-                playsInline
-                preload="none"
-                aria-label={video.caption ?? project.title}
+                label={video.caption ?? project.title}
               />
               {video.caption ? <figcaption>{video.caption}</figcaption> : null}
             </figure>
@@ -91,6 +200,9 @@ type DisciplinePageProps = {
 
 export function DisciplinePage({ slug }: DisciplinePageProps) {
   const discipline = getDiscipline(slug);
+  // Declared before the not-found return so the hook order stays stable.
+  const pageRef = useRef<HTMLElement>(null);
+  useTidyVideoPlayback(pageRef, slug);
 
   if (!discipline) {
     return (
@@ -108,7 +220,7 @@ export function DisciplinePage({ slug }: DisciplinePageProps) {
   const Icon = iconMap[discipline.icon];
 
   return (
-    <section className="section page">
+    <section className="section page" ref={pageRef}>
       <Link className="back-link" to="/work">
         <ArrowLeft size={16} />
         All work areas
