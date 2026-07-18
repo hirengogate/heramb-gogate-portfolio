@@ -307,6 +307,20 @@ export const disciplines: Discipline[] = [
             caption: 'Meta Ads Manager — NORI custom performance view across 39 campaigns.',
           },
         ],
+        videos: [
+          {
+            src: '/performance/nori-ugc-jahannvi.mp4',
+            caption: 'UGC ad creative — creator-led product piece run on Meta.',
+          },
+          {
+            src: '/performance/nori-ugc-meenkshi.mp4',
+            caption: 'UGC ad creative — creator-led product piece run on Meta.',
+          },
+          {
+            src: '/performance/nori-ugc-diya.mp4',
+            caption: 'UGC ad creative — creator-led product piece run on Meta.',
+          },
+        ],
       },
       eDrishyam,
     ],
