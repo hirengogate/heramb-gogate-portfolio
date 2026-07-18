@@ -1167,22 +1167,24 @@ ul {
   line-height: 1.45;
 }
 
-/* Row galleries: one horizontal shelf of equal-height images. Widths follow
-   each image's own aspect ratio, so mixed portrait/square/landscape assets sit
-   together without being cropped. */
-.project-card__gallery.is-row {
+/* Tiled galleries: equal-height images laid out --gallery-cols across, wrapping
+   onto further rows. Columns are a fixed fraction of the row rather than each
+   image's natural width, so a long caption can't inflate a column, and
+   object-fit: contain keeps mixed portrait/square/landscape assets uncropped. */
+.project-card__gallery.is-tiled {
   justify-content: center;
   align-items: flex-start;
 }
 
-/* Equal-width columns rather than natural widths: caption length then can't
-   inflate a column and push the row into wrapping. */
-.project-card__gallery.is-row figure {
-  flex: 1 1 0;
+/* Capped so a two-column gallery doesn't get boxes far wider than its portrait
+   creatives can fill — tiles stay a consistent size across every case study. */
+.project-card__gallery.is-tiled figure {
+  flex: 0 1 calc((100% - (var(--gallery-cols) - 1) * 16px) / var(--gallery-cols));
+  max-width: 380px;
   min-width: 0;
 }
 
-.project-card__gallery.is-row img {
+.project-card__gallery.is-tiled img {
   width: 100%;
   height: clamp(200px, 24vw, 320px);
   max-height: none;
@@ -1406,13 +1408,13 @@ ul {
     width: min(100%, 320px);
   }
 
-  /* A shelf of shrunken images is unreadable on a phone — stack them full
-     width instead, capped so a tall creative can't take over the screen. */
-  .project-card__gallery.is-row figure {
+  /* Shrunken tiles are unreadable on a phone — stack them full width instead,
+     capped so a tall creative can't take over the screen. */
+  .project-card__gallery.is-tiled figure {
     flex-basis: 100%;
   }
 
-  .project-card__gallery.is-row img {
+  .project-card__gallery.is-tiled img {
     width: 100%;
     height: auto;
     max-height: 70vh;

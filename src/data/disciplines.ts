@@ -31,6 +31,7 @@ const kraasaSocial: Project = {
     'Mixed formats to match intent: product hero creatives, aspirational lifestyle shoots, community/activity angles (Strava), and meme content for relatability and reach.',
     'Optimized hooks, creatives, captions, and posting cadence from performance signals — driving 856.1K reach, 437.7K views (145K organic / 292K boosted), and 11.5K interactions in a two-month window.',
   ],
+  galleryColumns: 3,
   images: [
     {
       src: '/social/kraasa-ig-jul2025.jpeg',
@@ -77,6 +78,7 @@ const amuktiSocial: Project = {
     'Grew a relevant, engaged audience organically (~500–600 new followers), supported by selective low-budget boosting instead of giveaways or spam.',
     'Planned and executed a consistent festive-season content calendar across product, model, and lifestyle formats.',
   ],
+  galleryColumns: 2,
   images: [
     {
       src: '/social/amukti-static-felt.webp',
@@ -111,7 +113,7 @@ const eDrishyam: Project = {
     'Creative and content work pushed top pieces to 152K–214K views and lifted the page’s engagement rate to 529.92% over 60 days.',
     'The creative-led approach fueled 10 festival nominations, 6 awards, and a 270% increase in inbound filmmaking-coaching inquiries.',
   ],
-  galleryLayout: 'row',
+  galleryColumns: 3,
   images: [
     {
       src: '/performance/edrishyam-creative-design.png',
@@ -147,6 +149,7 @@ const pokarnaSocial: Project = {
     'Established the brand as a Meta-verified page early, lending instant credibility and discoverability to a brand-new label with no prior audience.',
     'Drove growth through a disciplined content calendar and a recognizable visual signature rather than generic product posts — every piece reinforced the “art of fashion heritage” positioning.',
   ],
+  galleryColumns: 2,
   images: [
     {
       src: '/social/pokarna-ig-sep2025.jpg',

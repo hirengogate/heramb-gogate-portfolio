@@ -80,9 +80,9 @@ export type Project = {
   highlights: string[];
   metrics?: { value: string; label: string }[];
   images?: { src: string; caption?: string; half?: boolean }[];
-  // 'row' lays the gallery out as a single equal-height horizontal shelf
-  // (widths follow each image's aspect ratio) instead of stacking full-width.
-  galleryLayout?: 'row';
+  // Lay the gallery out as equal-height tiles N across, wrapping onto further
+  // rows, instead of stacking every image full-width. Omit to keep stacking.
+  galleryColumns?: 2 | 3;
   // Vertical (9:16) case-study clips served from public/ and played inline.
   // `poster` defaults to /posters/<filename>.webp — see posterFor().
   videos?: { src: string; caption?: string; poster?: string }[];

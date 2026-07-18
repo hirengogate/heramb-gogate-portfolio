@@ -45,9 +45,12 @@ function ProjectCard({ project }: { project: Project }) {
       {project.images && project.images.length > 0 ? (
         <div
           className={
-            project.galleryLayout === 'row'
-              ? 'project-card__gallery is-row'
-              : 'project-card__gallery'
+            project.galleryColumns ? 'project-card__gallery is-tiled' : 'project-card__gallery'
+          }
+          style={
+            project.galleryColumns
+              ? ({ '--gallery-cols': project.galleryColumns } as React.CSSProperties)
+              : undefined
           }
         >
           {project.images.map((image) => (
