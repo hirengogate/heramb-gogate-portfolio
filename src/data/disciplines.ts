@@ -219,6 +219,10 @@ const amuktiInfluencer: Project = {
       src: '/influencer/amukti-roshni.mp4',
       caption: 'UGC — creator try-on and styling piece for Amukti.',
     },
+    {
+      src: '/influencer/amukti-pujita.mp4',
+      caption: 'UGC — creator try-on and styling piece for Amukti.',
+    },
   ],
 };
 
