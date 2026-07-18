@@ -84,7 +84,8 @@ export type Project = {
   // (widths follow each image's aspect ratio) instead of stacking full-width.
   galleryLayout?: 'row';
   // Vertical (9:16) case-study clips served from public/ and played inline.
-  videos?: { src: string; caption?: string }[];
+  // `poster` defaults to /posters/<filename>.webp — see posterFor().
+  videos?: { src: string; caption?: string; poster?: string }[];
 };
 
 export type Discipline = {

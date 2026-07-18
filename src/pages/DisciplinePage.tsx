@@ -3,6 +3,13 @@ import { Link } from '../lib/router';
 import { getDiscipline } from '../data/disciplines';
 import { iconMap, type Project } from '../data/portfolio';
 
+// Poster frames live in public/posters/ under the clip's own filename, so a
+// video only needs an explicit `poster` when it deviates from that.
+function posterFor(src: string): string {
+  const file = src.split('/').pop()?.replace(/\.mp4$/, '.webp') ?? '';
+  return `/posters/${file}`;
+}
+
 function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="project-card">
@@ -56,13 +63,14 @@ function ProjectCard({ project }: { project: Project }) {
         <div className="project-card__reels">
           {project.videos.map((video) => (
             <figure key={video.src}>
-              {/* #t=0.1 seeks to the first frame so the clip shows a still
-                  instead of a black box before playback. */}
+              {/* preload="none" keeps page load free of video bytes; the poster
+                  supplies the still frame until the visitor hits play. */}
               <video
-                src={`${video.src}#t=0.1`}
+                src={video.src}
+                poster={video.poster ?? posterFor(video.src)}
                 controls
                 playsInline
-                preload="metadata"
+                preload="none"
                 aria-label={video.caption ?? project.title}
               />
               {video.caption ? <figcaption>{video.caption}</figcaption> : null}
