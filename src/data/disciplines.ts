@@ -111,6 +111,7 @@ const eDrishyam: Project = {
     'Creative and content work pushed top pieces to 152K–214K views and lifted the page’s engagement rate to 529.92% over 60 days.',
     'The creative-led approach fueled 10 festival nominations, 6 awards, and a 270% increase in inbound filmmaking-coaching inquiries.',
   ],
+  galleryLayout: 'row',
   images: [
     {
       src: '/performance/edrishyam-creative-design.png',

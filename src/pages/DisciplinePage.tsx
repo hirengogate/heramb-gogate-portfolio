@@ -36,7 +36,13 @@ function ProjectCard({ project }: { project: Project }) {
       ) : null}
 
       {project.images && project.images.length > 0 ? (
-        <div className="project-card__gallery">
+        <div
+          className={
+            project.galleryLayout === 'row'
+              ? 'project-card__gallery is-row'
+              : 'project-card__gallery'
+          }
+        >
           {project.images.map((image) => (
             <figure key={image.src} className={image.half ? 'is-half' : undefined}>
               <img src={image.src} alt={image.caption ?? project.title} loading="lazy" />

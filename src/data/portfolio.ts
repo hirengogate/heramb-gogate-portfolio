@@ -80,6 +80,9 @@ export type Project = {
   highlights: string[];
   metrics?: { value: string; label: string }[];
   images?: { src: string; caption?: string; half?: boolean }[];
+  // 'row' lays the gallery out as a single equal-height horizontal shelf
+  // (widths follow each image's aspect ratio) instead of stacking full-width.
+  galleryLayout?: 'row';
   // Vertical (9:16) case-study clips served from public/ and played inline.
   videos?: { src: string; caption?: string }[];
 };
