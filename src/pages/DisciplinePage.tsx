@@ -104,14 +104,16 @@ function useTidyVideoPlayback(root: React.RefObject<HTMLElement | null>, key: st
 }
 
 /**
- * A single UGC clip: poster plus an explicit play button. Nothing is fetched
- * until the visitor presses play, and the button comes back whenever the clip
- * pauses — including when the exclusive-playback and scroll rules pause it —
- * so there is always an obvious way to start it again.
+ * A single UGC clip: poster plus a play button, with nothing fetched until the
+ * visitor presses it.
+ *
+ * The button only exists before the first play. After that the native controls
+ * are showing and they draw their own centred play button on a paused clip —
+ * on Android Chrome in particular — so keeping ours would stack two play icons
+ * on top of each other.
  */
 function ReelVideo({ src, poster, label }: { src: string; poster: string; label: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
   const [started, setStarted] = useState(false);
 
   const start = () => {
@@ -119,9 +121,9 @@ function ReelVideo({ src, poster, label }: { src: string; poster: string; label:
     if (!video) return;
     setStarted(true);
     void video.play().catch(() => {
-      // Autoplay policy or a decode failure — leave the button up so the
+      // Autoplay policy or a decode failure — put the button back so the
       // visitor can try again rather than staring at a dead frame.
-      setPlaying(false);
+      setStarted(false);
     });
   };
 
@@ -137,17 +139,11 @@ function ReelVideo({ src, poster, label }: { src: string; poster: string; label:
         playsInline
         preload="none"
         aria-label={label}
-        onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-        onEnded={() => setPlaying(false)}
       />
-      {!playing ? (
+      {!started ? (
         <button
           type="button"
-          // Before first play the whole poster is the target. Once the native
-          // controls are showing, shrink the hit area to the disc so a paused
-          // clip's scrubber stays reachable.
-          className={started ? 'reel__play is-compact' : 'reel__play'}
+          className="reel__play"
           onClick={start}
           aria-label={`Play: ${label}`}
         >

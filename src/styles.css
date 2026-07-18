@@ -1245,16 +1245,6 @@ ul {
   cursor: pointer;
 }
 
-/* Once native controls are visible only the disc should swallow clicks. */
-.reel__play.is-compact {
-  background: none;
-  pointer-events: none;
-}
-
-.reel__play.is-compact .reel__play-disc {
-  pointer-events: auto;
-}
-
 .reel__play-disc {
   display: grid;
   place-items: center;
