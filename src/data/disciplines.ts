@@ -168,6 +168,32 @@ const pokarnaSocial: Project = {
   ],
 };
 
+const tribeFiction: Project = {
+  title: 'Creator-Led UGC to Take a North East Streetwear Label Mainland',
+  brand: 'Tribe Fiction',
+  summary:
+    'Tribe Fiction is the biggest streetwear label out of Mizoram, North East India. I ran the influencer marketing behind its push into the mainland Indian market — sourcing creators and producing UGC that introduced the brand to audiences outside the North East.',
+  highlights: [
+    'Led influencer marketing for the brand’s mainland India expansion, building the creator roster that carried a regional label into a new market.',
+    'Produced creator-led UGC in the try-on and styling formats that convert for streetwear — real people wearing the product, not studio catalogue shots.',
+    'Briefed each creator on brand positioning and hooks so the output stayed on-identity while reading as native creator content rather than an ad.',
+  ],
+  videos: [
+    {
+      src: '/influencer/tribe-fiction-manvi.mp4',
+      caption: 'UGC — creator styling and try-on piece for Tribe Fiction.',
+    },
+    {
+      src: '/influencer/tribe-fiction-rohan.mp4',
+      caption: 'UGC — creator styling and try-on piece for Tribe Fiction.',
+    },
+    {
+      src: '/influencer/tribe-fiction-vinit.mp4',
+      caption: 'UGC — creator styling and try-on piece for Tribe Fiction.',
+    },
+  ],
+};
+
 export const disciplines: Discipline[] = [
   {
     slug: 'performance-marketing',
@@ -369,6 +395,7 @@ export const disciplines: Discipline[] = [
           'Final delivery: closed high-quality, brand-aligned creators with contract clarity and shoot readiness, reducing campaign risk and improving creative output quality.',
         ],
       },
+      tribeFiction,
     ],
   },
 ];

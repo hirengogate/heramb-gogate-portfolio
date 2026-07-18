@@ -1167,6 +1167,37 @@ ul {
   line-height: 1.45;
 }
 
+/* Vertical (9:16) UGC clips — played inline, three across on desktop */
+.project-card__reels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.project-card__reels figure {
+  margin: 0;
+}
+
+.project-card__reels video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #000;
+  box-shadow: 0 10px 30px rgba(42, 45, 43, 0.07);
+  object-fit: cover;
+}
+
+.project-card__reels figcaption {
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 720;
+  line-height: 1.45;
+}
+
 /* Empty-state placeholder for areas awaiting content */
 .empty-state {
   display: grid;
@@ -1340,6 +1371,16 @@ ul {
   .credentials,
   .testimonial-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Stack the reels rather than shrinking them to unusable slivers */
+  .project-card__reels {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .project-card__reels figure {
+    width: min(100%, 320px);
   }
 
   .hero,

@@ -74,11 +74,14 @@ export type SkillGroup = {
 export type Project = {
   title: string;
   brand: string;
-  period: string;
+  // Optional: omitted while a case study's dates are still being confirmed.
+  period?: string;
   summary: string;
   highlights: string[];
   metrics?: { value: string; label: string }[];
   images?: { src: string; caption?: string; half?: boolean }[];
+  // Vertical (9:16) case-study clips served from public/ and played inline.
+  videos?: { src: string; caption?: string }[];
 };
 
 export type Discipline = {

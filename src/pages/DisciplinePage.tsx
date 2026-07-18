@@ -10,7 +10,7 @@ function ProjectCard({ project }: { project: Project }) {
         <div>
           <h3>{project.title}</h3>
           <p className="project-card__brand">
-            {project.brand} · {project.period}
+            {project.period ? `${project.brand} · ${project.period}` : project.brand}
           </p>
         </div>
       </div>
@@ -41,6 +41,25 @@ function ProjectCard({ project }: { project: Project }) {
             <figure key={image.src} className={image.half ? 'is-half' : undefined}>
               <img src={image.src} alt={image.caption ?? project.title} loading="lazy" />
               {image.caption ? <figcaption>{image.caption}</figcaption> : null}
+            </figure>
+          ))}
+        </div>
+      ) : null}
+
+      {project.videos && project.videos.length > 0 ? (
+        <div className="project-card__reels">
+          {project.videos.map((video) => (
+            <figure key={video.src}>
+              {/* #t=0.1 seeks to the first frame so the clip shows a still
+                  instead of a black box before playback. */}
+              <video
+                src={`${video.src}#t=0.1`}
+                controls
+                playsInline
+                preload="metadata"
+                aria-label={video.caption ?? project.title}
+              />
+              {video.caption ? <figcaption>{video.caption}</figcaption> : null}
             </figure>
           ))}
         </div>
