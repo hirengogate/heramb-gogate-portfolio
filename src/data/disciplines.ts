@@ -194,6 +194,30 @@ const tribeFiction: Project = {
   ],
 };
 
+// Amukti also appears under Social Media Marketing (see amuktiSocial above);
+// this entry covers the separate creator-led UGC work.
+const amuktiInfluencer: Project = {
+  title: 'Creator-Led UGC for a South Indian Ethnic-Wear Label',
+  brand: 'Amukti',
+  summary:
+    'Amukti is one of South India’s biggest ethnic-wear brands. I ran the creator-led UGC for the label — producing authentic try-on and styling content that showed the pieces worn and moving, rather than staged on a mannequin.',
+  highlights: [
+    'Produced creator UGC for the brand, briefing creators to capture drape, fabric movement, and fit — the details that decide ethnic-wear purchases and that flat product photography misses.',
+    'Kept the output native to the creator’s own feed style while holding Amukti’s premium, festive positioning intact.',
+    'Built the clips for social-first vertical placements so the same assets could carry across organic and paid.',
+  ],
+  videos: [
+    {
+      src: '/influencer/amukti-rachna.mp4',
+      caption: 'UGC — creator try-on and styling piece for Amukti.',
+    },
+    {
+      src: '/influencer/amukti-roshni.mp4',
+      caption: 'UGC — creator try-on and styling piece for Amukti.',
+    },
+  ],
+};
+
 export const disciplines: Discipline[] = [
   {
     slug: 'performance-marketing',
@@ -396,6 +420,7 @@ export const disciplines: Discipline[] = [
         ],
       },
       tribeFiction,
+      amuktiInfluencer,
     ],
   },
 ];

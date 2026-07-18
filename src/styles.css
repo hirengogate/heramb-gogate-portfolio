@@ -1167,15 +1167,20 @@ ul {
   line-height: 1.45;
 }
 
-/* Vertical (9:16) UGC clips — played inline, three across on desktop */
+/* Vertical (9:16) UGC clips — played inline, up to three across on desktop.
+   Flex rather than grid so a row of two centres instead of leaving an empty
+   third column, while tiles keep the same width across every case study. */
 .project-card__reels {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 18px;
   margin-top: 26px;
 }
 
 .project-card__reels figure {
+  flex: 0 1 calc((100% - 36px) / 3);
+  min-width: 240px;
   margin: 0;
 }
 
@@ -1374,12 +1379,8 @@ ul {
   }
 
   /* Stack the reels rather than shrinking them to unusable slivers */
-  .project-card__reels {
-    grid-template-columns: 1fr;
-    justify-items: center;
-  }
-
   .project-card__reels figure {
+    flex-basis: 100%;
     width: min(100%, 320px);
   }
 
