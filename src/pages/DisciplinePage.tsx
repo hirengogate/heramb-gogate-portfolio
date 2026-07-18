@@ -15,53 +15,89 @@ function posterFor(src: string): string {
 // that reading the caption under a playing clip doesn't stop it.
 const VISIBLE_ENOUGH = 0.25;
 
+// Upper bound on how often scrolling re-measures the clips.
+const SCROLL_THROTTLE_MS = 100;
+
+// Leave a clip alone while it owns the screen — pausing a fullscreen or
+// picture-in-picture video because the page scrolled behind it is wrong.
+function ownsTheScreen(video: HTMLVideoElement): boolean {
+  return document.fullscreenElement === video || document.pictureInPictureElement === video;
+}
+
+/** How much of the clip's height is inside the viewport, as a 0–1 fraction. */
+export function visibleFraction(rect: DOMRect, viewportHeight: number): number {
+  if (rect.height <= 0) return 0;
+  const visible = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+  return Math.max(0, visible) / rect.height;
+}
+
 /**
  * Keeps the clips on a discipline page well behaved: only one plays at a time,
  * and scrolling a playing clip out of view pauses it.
  *
- * Runs off the DOM rather than per-video React state because the videos are
- * spread across sibling ProjectCards and never need to re-render for this —
- * pausing is a direct imperative call on the element.
+ * Deliberately measures geometry on scroll rather than using an
+ * IntersectionObserver: the observer only reports at threshold crossings, and
+ * on mobile it proved unreliable at actually stopping a clip that had been
+ * scrolled past. A direct measurement answers "is this still on screen" the
+ * same way every time. It costs nothing while nothing is playing, since the
+ * handler bails before touching layout in that case.
+ *
+ * Listeners are delegated from the page container rather than bound per video,
+ * so a clip is covered even if React swaps its element on a re-render.
  */
 function useTidyVideoPlayback(root: React.RefObject<HTMLElement | null>, key: string) {
   useEffect(() => {
     const el = root.current;
     if (!el) return;
 
-    const videos = Array.from(el.querySelectorAll('video'));
-    if (videos.length === 0) return;
+    const clips = () => Array.from(el.querySelectorAll('video'));
 
-    // Leave a clip alone while it owns the screen — pausing a fullscreen or
-    // picture-in-picture video because the page scrolled behind it is wrong.
-    const isDetached = (v: HTMLVideoElement) =>
-      document.fullscreenElement === v || document.pictureInPictureElement === v;
-
+    // 'play' doesn't bubble, but it does capture — so one listener on the
+    // container sees every clip start, whenever it was added to the page.
     const onPlay = (event: Event) => {
-      for (const other of videos) {
-        if (other !== event.target && !other.paused) other.pause();
+      const started = event.target;
+      for (const other of clips()) {
+        if (other !== started && !other.paused) other.pause();
       }
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          const video = entry.target as HTMLVideoElement;
-          if (entry.intersectionRatio < VISIBLE_ENOUGH && !video.paused && !isDetached(video)) {
-            video.pause();
-          }
+    const pauseWhatIsOffScreen = () => {
+      const playing = clips().filter((v) => !v.paused && !ownsTheScreen(v));
+      if (playing.length === 0) return; // nothing playing: no layout reads
+      for (const video of playing) {
+        if (visibleFraction(video.getBoundingClientRect(), window.innerHeight) < VISIBLE_ENOUGH) {
+          video.pause();
         }
-      },
-      { threshold: [0, VISIBLE_ENOUGH] },
-    );
+      }
+    };
 
-    for (const video of videos) {
-      video.addEventListener('play', onPlay);
-      observer.observe(video);
-    }
+    // Throttled on a timestamp rather than requestAnimationFrame: rAF is tied
+    // to the compositor and does not run in a backgrounded tab, which would
+    // silently drop the check. The trailing call makes sure the clip's final
+    // resting position is measured once scrolling stops.
+    let lastRun = 0;
+    let trailing = 0;
+    const run = () => {
+      lastRun = Date.now();
+      pauseWhatIsOffScreen();
+    };
+    const onScroll = () => {
+      if (Date.now() - lastRun >= SCROLL_THROTTLE_MS) run();
+      window.clearTimeout(trailing);
+      trailing = window.setTimeout(run, SCROLL_THROTTLE_MS);
+    };
+
+    el.addEventListener('play', onPlay, true);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    document.addEventListener('scroll', onScroll, { passive: true, capture: true });
 
     return () => {
-      for (const video of videos) video.removeEventListener('play', onPlay);
-      observer.disconnect();
+      window.clearTimeout(trailing);
+      el.removeEventListener('play', onPlay, true);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      document.removeEventListener('scroll', onScroll, true);
     };
     // `key` re-binds when the route swaps in a different set of clips.
   }, [root, key]);
