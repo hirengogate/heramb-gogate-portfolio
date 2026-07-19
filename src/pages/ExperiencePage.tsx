@@ -1,5 +1,6 @@
 import { SectionHeading } from '../components/SectionHeading';
 import { Testimonials } from '../components/Testimonials';
+import { Reveal } from '../lib/reveal';
 import type { PortfolioData } from '../data/portfolio';
 
 type ExperiencePageProps = {
@@ -12,14 +13,17 @@ export function ExperiencePage({ data }: ExperiencePageProps) {
   return (
     <>
       <section className="section section--split page" id="experience">
-        <SectionHeading
-          eyebrow="Experience"
-          title="A timeline across acquisition, content, research, and operations."
-        />
+        <Reveal>
+          <SectionHeading
+            index="01"
+            eyebrow="Experience"
+            title="A timeline across acquisition, content, research, and operations."
+          />
+        </Reveal>
 
         <div className="timeline">
           {experiences.map((item) => (
-            <article className="timeline-item" key={`${item.company}-${item.role}`}>
+            <Reveal as="article" className="timeline-item" key={`${item.company}-${item.role}`}>
               <div className="timeline-item__meta">
                 <span>{item.period}</span>
                 <span>{item.location}</span>
@@ -33,13 +37,13 @@ export function ExperiencePage({ data }: ExperiencePageProps) {
                   ))}
                 </ul>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section className="section credentials">
-        <div>
+        <Reveal>
           <p className="eyebrow">Education</p>
           <h2>{education.degree}</h2>
           <p>
@@ -47,9 +51,9 @@ export function ExperiencePage({ data }: ExperiencePageProps) {
           </p>
           <strong>{education.result}</strong>
           <span>{education.note}</span>
-        </div>
+        </Reveal>
 
-        <div>
+        <Reveal delay={90}>
           <p className="eyebrow">Certifications</p>
           <ul className="certification-list">
             {certifications.map((certification) => (
@@ -59,10 +63,10 @@ export function ExperiencePage({ data }: ExperiencePageProps) {
               </li>
             ))}
           </ul>
-        </div>
+        </Reveal>
       </section>
 
-      <Testimonials />
+      <Testimonials index="02" />
     </>
   );
 }

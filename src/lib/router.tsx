@@ -7,7 +7,7 @@
 // decrypted data held in App state survives route changes.
 
 import { useEffect, useState } from 'react';
-import type { AnchorHTMLAttributes, ReactNode } from 'react';
+import type { AnchorHTMLAttributes, ReactNode, Ref } from 'react';
 
 function parseHash(): string {
   const raw = window.location.hash.replace(/^#/, '');
@@ -39,6 +39,7 @@ export function navigate(to: string): void {
 type LinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & {
   to: string;
   children: ReactNode;
+  ref?: Ref<HTMLAnchorElement>;
 };
 
 export function Link({ to, children, ...rest }: LinkProps) {

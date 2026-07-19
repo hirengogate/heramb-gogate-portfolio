@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, FolderPlus, Play } from 'lucide-react';
 import { Link } from '../lib/router';
+import { Reveal } from '../lib/reveal';
 import { getDiscipline } from '../data/disciplines';
 import { iconMap, type Project } from '../data/portfolio';
 
@@ -158,7 +159,7 @@ function ReelVideo({ src, poster, label }: { src: string; poster: string; label:
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="project-card">
+    <Reveal as="article" className="project-card">
       <div className="project-card__head">
         <div>
           <h3>{project.title}</h3>
@@ -222,7 +223,7 @@ function ProjectCard({ project }: { project: Project }) {
           ))}
         </div>
       ) : null}
-    </article>
+    </Reveal>
   );
 }
 
@@ -259,6 +260,9 @@ export function DisciplinePage({ slug }: DisciplinePageProps) {
       </Link>
 
       <div className={`discipline-hero discipline-hero--${discipline.accent}`}>
+        <div className="discipline-hero__watermark" aria-hidden="true">
+          <Icon size={230} strokeWidth={1.1} />
+        </div>
         <div className="discipline-hero__icon">
           <Icon size={26} />
         </div>

@@ -1,17 +1,36 @@
 import { Quote } from 'lucide-react';
 import { SectionHeading } from './SectionHeading';
+import { Reveal } from '../lib/reveal';
 import { testimonials } from '../data/disciplines';
 
-export function Testimonials() {
+type TestimonialsProps = {
+  /** Optional editorial numbering passed through to the section heading. */
+  index?: string;
+};
+
+export function Testimonials({ index }: TestimonialsProps) {
   return (
     <section className="section" id="testimonials">
-      <SectionHeading eyebrow="Testimonials" title="What clients and founders have said." />
+      <Reveal>
+        <SectionHeading
+          index={index}
+          eyebrow="Testimonials"
+          title="What clients and founders have said."
+        />
+      </Reveal>
 
       {testimonials.length > 0 ? (
         <div className="testimonial-grid">
-          {testimonials.map((testimonial) => (
-            <article className="testimonial-card" key={testimonial.name}>
-              <Quote size={22} />
+          {testimonials.map((testimonial, cardIndex) => (
+            <Reveal
+              as="article"
+              className="testimonial-card"
+              delay={cardIndex * 80}
+              key={testimonial.name}
+            >
+              <span className="testimonial-card__glyph" aria-hidden="true">
+                “
+              </span>
               <p>{testimonial.quote}</p>
               <div className="testimonial-card__author">
                 <img
@@ -30,7 +49,7 @@ export function Testimonials() {
                   </span>
                 </div>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       ) : (

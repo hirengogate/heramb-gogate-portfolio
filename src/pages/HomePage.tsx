@@ -1,8 +1,11 @@
 import { ArrowRight, Download, Mail, MapPin } from 'lucide-react';
+import { BrandStrip } from '../components/BrandStrip';
 import { CampaignVisual } from '../components/CampaignVisual';
+import { CountUp } from '../components/CountUp';
 import { SectionHeading } from '../components/SectionHeading';
 import { Testimonials } from '../components/Testimonials';
 import { Link } from '../lib/router';
+import { Reveal } from '../lib/reveal';
 import { disciplines } from '../data/disciplines';
 import { iconMap, type PortfolioData } from '../data/portfolio';
 
@@ -47,30 +50,42 @@ export function HomePage({ data, gmailComposeUrl }: HomePageProps) {
         <CampaignVisual />
       </section>
 
-      <section className="metrics-band" aria-label="Selected performance metrics">
-        {metrics.map((metric) => (
+      <BrandStrip />
+
+      {/* Revealed as one block: per-card reveals would expose the hairline-grid
+          background between cards mid-animation. The stagger comes from the
+          count-up delays instead. */}
+      <Reveal as="section" className="metrics-band" aria-label="Selected performance metrics">
+        {metrics.map((metric, index) => (
           <article key={metric.label} className="metric-card">
-            <strong>{metric.value}</strong>
+            <strong>
+              <CountUp value={metric.value} delay={index * 120} />
+            </strong>
             <span>{metric.label}</span>
             <p>{metric.detail}</p>
           </article>
         ))}
-      </section>
+      </Reveal>
 
       <section className="section" id="work">
-        <SectionHeading
-          eyebrow="What I do"
-          title="Work organized by what you're looking for."
-          copy="Each area below is its own page. Open one to see the case studies, campaigns, and results behind it."
-        />
+        <Reveal>
+          <SectionHeading
+            index="01"
+            eyebrow="What I do"
+            title="Work organized by what you're looking for."
+            copy="Each area below is its own page. Open one to see the case studies, campaigns, and results behind it."
+          />
+        </Reveal>
 
         <div className="case-grid">
-          {disciplines.map((discipline) => {
+          {disciplines.map((discipline, index) => {
             const Icon = iconMap[discipline.icon];
             return (
-              <Link
+              <Reveal
+                as={Link}
                 className={`case-card case-card--${discipline.accent} discipline-card`}
                 to={`/work/${discipline.slug}`}
+                delay={index * 70}
                 key={discipline.slug}
               >
                 <div className="case-card__top">
@@ -85,15 +100,15 @@ export function HomePage({ data, gmailComposeUrl }: HomePageProps) {
                   View case studies
                   <ArrowRight size={15} />
                 </span>
-              </Link>
+              </Reveal>
             );
           })}
         </div>
       </section>
 
-      <Testimonials />
+      <Testimonials index="02" />
 
-      <section className="contact-section" id="contact">
+      <Reveal as="section" className="contact-section" id="contact">
         <p className="eyebrow">Contact</p>
         <h2>Need someone who can make your marketing efforts actually convert?</h2>
         <p>
@@ -110,7 +125,7 @@ export function HomePage({ data, gmailComposeUrl }: HomePageProps) {
             <ArrowRight size={16} />
           </Link>
         </div>
-      </section>
+      </Reveal>
     </>
   );
 }

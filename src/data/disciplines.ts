@@ -5,9 +5,9 @@
 // lives here (titles + one-line summaries); it is not sensitive, so unlike the
 // portfolio body it is not encrypted.
 //
-// `projects` is intentionally EMPTY for now. Add case studies (Kraasa, NORI,
-// e-Drishyam, Instasculpt, the AOAS outbound system, etc.) into the relevant
-// discipline's `projects` array as that content is written up.
+// Each discipline's `projects` array holds its written-up case studies
+// (Kraasa, NORI, e-Drishyam, Instasculpt, the AOAS outbound system, etc.).
+// Add new case studies to the relevant discipline as they are written.
 
 import type { Discipline, Project, Testimonial } from './portfolio';
 
@@ -492,4 +492,17 @@ export const testimonials: Testimonial[] = [
       'Heramb played a crucial role in helping me develop the Ideal Customer Persona (ICP) for my business. His deep knowledge of market research, marketing, and audience targeting made the process seamless and effective. Thanks to his guidance, I gained clarity on my target audience, which allowed me to tailor my marketing efforts and achieve business growth.',
     avatar: '/testimonials/timothy-cortez.webp',
   },
+];
+
+// Client brands surfaced on the home-page strip — plaintext by design, same as
+// the discipline content above.
+export const brands: string[] = [
+  'Kraasa',
+  'House of Pokarna',
+  'Amukti',
+  'NORI',
+  'e-Drishyam Film School',
+  'Instasculpt',
+  'Tribe Fiction',
+  'AOAS',
 ];

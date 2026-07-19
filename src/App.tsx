@@ -47,7 +47,9 @@ function App() {
   return (
     <main>
       <SiteHeader path={path} />
-      {renderPage(path, data, gmailComposeUrl)}
+      <div className="route-view" key={path}>
+        {renderPage(path, data, gmailComposeUrl)}
+      </div>
       <SiteFooter profile={data.profile} gmailComposeUrl={gmailComposeUrl} />
     </main>
   );
