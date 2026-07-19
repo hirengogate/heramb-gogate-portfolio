@@ -102,7 +102,7 @@ export function LockScreen({ onUnlock }: LockScreenProps) {
         <p className="eyebrow">Private portfolio</p>
         <h1>Enter access code</h1>
         <p className="lock-card__copy">
-          Use the 4-digit passcode to view Heramb Gogate's portfolio.
+          Use the 4-digit passcode to view Heramb's portfolio.
         </p>
 
         <div className="passcode-dots" aria-label={`${code.length} of 4 digits entered`}>
