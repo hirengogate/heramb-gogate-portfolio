@@ -691,7 +691,6 @@ h1 {
 }
 
 .section-heading h2,
-.credentials h2,
 .contact-section h2 {
   margin-bottom: 14px;
   color: var(--ink);
@@ -764,7 +763,6 @@ h1 {
 }
 
 .case-card h3,
-.timeline-item h3,
 .skill-card h3 {
   margin-bottom: 12px;
   color: var(--ink);
@@ -785,8 +783,6 @@ ul {
 }
 
 .case-card li,
-.timeline-item li,
-.credentials li,
 .project-card li {
   position: relative;
   padding-left: 18px;
@@ -795,15 +791,11 @@ ul {
 }
 
 .case-card li + li,
-.timeline-item li + li,
-.credentials li + li,
 .project-card li + li {
   margin-top: 10px;
 }
 
 .case-card li::before,
-.timeline-item li::before,
-.credentials li::before,
 .project-card li::before {
   position: absolute;
   top: 0.68em;
@@ -813,65 +805,6 @@ ul {
   border-radius: 50%;
   background: var(--teal);
   content: "";
-}
-
-.timeline {
-  position: relative;
-  display: grid;
-  gap: 16px;
-  padding-left: 26px;
-}
-
-.timeline::before {
-  position: absolute;
-  top: 12px;
-  bottom: 12px;
-  left: 4px;
-  width: 1px;
-  background: var(--line);
-  content: "";
-}
-
-.timeline-item {
-  position: relative;
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 28px;
-  padding: 28px;
-  border: 1px solid rgba(23, 23, 20, 0.1);
-  border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.76);
-  box-shadow: var(--shadow-sm);
-}
-
-/* Marker dot sitting on the timeline rail; the paper ring punches the rail
-   out around it. */
-.timeline-item::before {
-  position: absolute;
-  top: 32px;
-  left: -28px;
-  width: 9px;
-  height: 9px;
-  border: 2px solid var(--teal);
-  border-radius: 50%;
-  background: var(--paper);
-  box-shadow: 0 0 0 4px var(--paper);
-  content: "";
-}
-
-.timeline-item__meta {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  color: var(--muted);
-  font-size: 0.86rem;
-  font-weight: var(--fw-semibold);
-}
-
-.timeline-item__body p {
-  margin-bottom: 18px;
-  color: var(--wine);
-  font-weight: var(--fw-semibold);
 }
 
 .skills-grid {
@@ -923,20 +856,6 @@ ul {
   font-weight: var(--fw-medium);
 }
 
-.credentials {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  align-items: start;
-  gap: 16px;
-}
-
-.credentials > div {
-  padding: clamp(28px, 5vw, 50px);
-  border: 1px solid rgba(23, 23, 20, 0.1);
-  border-radius: var(--radius-xl);
-  background: rgba(255, 255, 255, 0.78);
-}
-
 .contact-section {
   position: relative;
   isolation: isolate;
@@ -958,38 +877,10 @@ ul {
     radial-gradient(circle at 88% 92%, rgba(143, 47, 75, 0.1), transparent 46%);
 }
 
-.credentials p:not(.eyebrow),
-.credentials span,
 .contact-section p {
   display: block;
   color: var(--muted);
   line-height: 1.7;
-}
-
-.credentials strong {
-  display: inline-block;
-  margin: 8px 0 12px;
-  color: var(--teal);
-  font-size: 1.04rem;
-}
-
-.certification-list {
-  display: grid;
-  gap: 16px;
-}
-
-.certification-list li {
-  padding-left: 18px;
-}
-
-.certification-list strong {
-  display: block;
-  margin: 0 0 5px;
-  color: var(--ink);
-}
-
-.certification-list span {
-  color: var(--muted);
 }
 
 .contact-section {
@@ -1549,8 +1440,7 @@ ul {
   .hero,
   .metrics-band,
   .case-grid,
-  .skills-grid,
-  .credentials {
+  .skills-grid {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -1594,9 +1484,7 @@ ul {
   .hero,
   .metrics-band,
   .case-grid,
-  .timeline-item,
   .skills-grid,
-  .credentials,
   .testimonial-grid {
     grid-template-columns: 1fr;
   }
@@ -1679,16 +1567,6 @@ ul {
   .case-card,
   .skill-card {
     min-height: 0;
-  }
-
-  .timeline-item {
-    gap: 20px;
-    padding: 22px;
-  }
-
-  .timeline-item__meta {
-    flex-direction: row;
-    flex-wrap: wrap;
   }
 
   .section {
@@ -1895,10 +1773,8 @@ nav a:focus-visible {
    deliberately no lift, they aren't clickable. */
 .metric-card,
 .skill-card,
-.timeline-item,
 .testimonial-card,
-.project-card,
-.credentials > div {
+.project-card {
   transition:
     border-color 300ms ease,
     box-shadow 300ms ease,
@@ -1906,10 +1782,8 @@ nav a:focus-visible {
 }
 
 .skill-card:hover,
-.timeline-item:hover,
 .testimonial-card:hover,
-.project-card:hover,
-.credentials > div:hover {
+.project-card:hover {
   border-color: rgba(23, 23, 20, 0.2);
 }
 

@@ -6,7 +6,6 @@ import { useHashPath } from './lib/router';
 import { HomePage } from './pages/HomePage';
 import { WorkHubPage } from './pages/WorkHubPage';
 import { DisciplinePage } from './pages/DisciplinePage';
-import { ExperiencePage } from './pages/ExperiencePage';
 import { SkillsPage } from './pages/SkillsPage';
 import { ContactPage } from './pages/ContactPage';
 import type { PortfolioData } from './data/portfolio';
@@ -21,9 +20,6 @@ function renderPage(path: string, data: PortfolioData, gmailComposeUrl: string) 
   }
   if (path.startsWith('/work/')) {
     return <DisciplinePage slug={path.slice('/work/'.length)} />;
-  }
-  if (path === '/experience') {
-    return <ExperiencePage data={data} />;
   }
   if (path === '/skills') {
     return <SkillsPage data={data} />;

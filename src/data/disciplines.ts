@@ -343,6 +343,38 @@ export const disciplines: Discipline[] = [
     projects: [kraasaSocial, pokarnaSocial, amuktiSocial, eDrishyam],
   },
   {
+    slug: 'influencer-marketing',
+    title: 'Influencer Marketing',
+    eyebrow: 'Creator sourcing · Campaigns',
+    summary:
+      'Sourcing, vetting, and managing the right creators and models for fashion shoots and campaigns, with a focus on commercial fit over follower count.',
+    icon: 'Users',
+    accent: 'wine',
+    projects: [
+      {
+        title: 'Influencer & Model Sourcing for Fashion Campaigns',
+        brand: 'AOAS',
+        period: '2025',
+        summary:
+          'Sourced, vetted, and closed high-intent creators and models for fashion shoots and campaigns — prioritizing engagement quality, audience economics, and execution reliability over raw follower counts.',
+        metrics: [
+          { value: '20+', label: 'Targeted discovery searches' },
+          { value: '4-stage', label: 'Sourcing & diligence funnel' },
+        ],
+        highlights: [
+          'Supported the team to identify, evaluate, and close the right influencers and models for fashion shoots and campaign executions — focused on creator quality, audience economics, and execution reliability.',
+          'Defined the brief: above-average engagement, followers with purchasing power and demographic relevance, professional and shoot-ready creators, and clean contract status with no exclusivity conflicts.',
+          'Instagram keyword-based discovery: ran 20+ targeted searches across fashion reels, styling, and model content, filtering on engagement-to-follower ratio, comment quality, content aesthetics, on-camera presence, and follower authenticity.',
+          'Competitor-led validation: analyzed which creators competitors repeatedly sponsored, treating proven repeat collaborators as high-confidence prospects.',
+          'Direct outreach and due diligence: personally confirmed availability, contracts and exclusivity, and professionalism — dropping anyone weak on clarity or execution readiness regardless of follower count.',
+          'Final delivery: closed high-quality, brand-aligned creators with contract clarity and shoot readiness, reducing campaign risk and improving creative output quality.',
+        ],
+      },
+      tribeFiction,
+      amuktiInfluencer,
+    ],
+  },
+  {
     slug: 'seo',
     title: 'SEO',
     eyebrow: 'Technical · On-page · Off-page',
@@ -425,38 +457,6 @@ export const disciplines: Discipline[] = [
           'Delivered a ~8% reply rate (well above the 2–4% cold benchmark) and consistent inbound conversations with decision-makers — a predictable acquisition channel with zero dependency on ads or inbound content.',
         ],
       },
-    ],
-  },
-  {
-    slug: 'influencer-marketing',
-    title: 'Influencer Marketing',
-    eyebrow: 'Creator sourcing · Campaigns',
-    summary:
-      'Sourcing, vetting, and managing the right creators and models for fashion shoots and campaigns, with a focus on commercial fit over follower count.',
-    icon: 'Users',
-    accent: 'wine',
-    projects: [
-      {
-        title: 'Influencer & Model Sourcing for Fashion Campaigns',
-        brand: 'AOAS',
-        period: '2025',
-        summary:
-          'Sourced, vetted, and closed high-intent creators and models for fashion shoots and campaigns — prioritizing engagement quality, audience economics, and execution reliability over raw follower counts.',
-        metrics: [
-          { value: '20+', label: 'Targeted discovery searches' },
-          { value: '4-stage', label: 'Sourcing & diligence funnel' },
-        ],
-        highlights: [
-          'Supported the team to identify, evaluate, and close the right influencers and models for fashion shoots and campaign executions — focused on creator quality, audience economics, and execution reliability.',
-          'Defined the brief: above-average engagement, followers with purchasing power and demographic relevance, professional and shoot-ready creators, and clean contract status with no exclusivity conflicts.',
-          'Instagram keyword-based discovery: ran 20+ targeted searches across fashion reels, styling, and model content, filtering on engagement-to-follower ratio, comment quality, content aesthetics, on-camera presence, and follower authenticity.',
-          'Competitor-led validation: analyzed which creators competitors repeatedly sponsored, treating proven repeat collaborators as high-confidence prospects.',
-          'Direct outreach and due diligence: personally confirmed availability, contracts and exclusivity, and professionalism — dropping anyone weak on clarity or execution readiness regardless of follower count.',
-          'Final delivery: closed high-quality, brand-aligned creators with contract clarity and shoot readiness, reducing campaign risk and improving creative output quality.',
-        ],
-      },
-      tribeFiction,
-      amuktiInfluencer,
     ],
   },
 ];

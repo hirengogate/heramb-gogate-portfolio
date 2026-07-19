@@ -3,7 +3,6 @@ import { Link } from '../lib/router';
 const navItems = [
   { label: 'Home', to: '/' },
   { label: 'Work', to: '/work' },
-  { label: 'Experience', to: '/experience' },
   { label: 'Skills', to: '/skills' },
   { label: 'Contact', to: '/contact' },
 ];
